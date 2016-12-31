@@ -1,0 +1,10 @@
+# Temp files shouldn't be tracked
+*.tmp
+
+# Python bytecode is not actual code
+*.pyc
+
+# Swap happens
+*.swo
+*.swp
+*.swn
