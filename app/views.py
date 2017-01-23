@@ -47,7 +47,7 @@ def post(name):
 
 def read_posts():
     import glob, os, yaml
-    post_paths = glob.glob(os.path.dirname(__file__) + '/../posts/*.post')
+    post_paths = glob.glob(os.path.dirname(__file__) + '/../posts/*')
     post_objs = []
     for post in post_paths:
         try:
