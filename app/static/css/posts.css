@@ -19,7 +19,7 @@ div.content img.post-image-center {
   color : #222;
 }
 
-.post-description a {
+.post-description a.read-more {
   font-size : 10px;
   line-height : 0em;
 }
