@@ -37,8 +37,8 @@ def post(name):
     try:
         for post in posts:
             if post.name == name:
-                return render_template(
-                        'post.html',
+                return render_template('post.html',
+                        tagline = choice(taglines),
                         post = post)
     except AttributeError:
         pass
