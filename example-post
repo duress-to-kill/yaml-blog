@@ -1,0 +1,13 @@
+title: Human-readable post title
+category: primary category ID
+tags: comma-separated list of tags to index by
+date: (optional - if this field doesn't exist, it will be auto-populated by the site the first time its loaded)
+body: |
+  any indented text that follows will be included in the post body.
+  this can wrap over multiple lines.
+  <br> tags are inserted in the cached copy where newlines exist in this file
+  images can be included inline with one of the following strings:
+  img:foo.jpg:wrap
+  img:bar.gif:center
+  the above two directives will be translated into html to embed respective image names from /static/images/ into the post.
+  images tagged with :wrap will be left-aligned and text will wrap around them, while :center will display as a centered block item.
