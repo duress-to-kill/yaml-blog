@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A self-hosted blog operated by Andy Wood">
+    <title>Welcome to the Mind Tax</title>
+
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/posts.css">
+    <link rel="stylesheet" href="/static/css/sidebar.css">
+
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="/static/css/grids-old-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="/static/css/grids.css">
+    <!--<![endif]-->
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="static/css/blog-old-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="/static/css/blog.css">
+    <!--<![endif]-->
+
+</head>
+<body>
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="header">
+          <h1 class="brand-title"><a href='/'>The Mind Tax</a></h1>
+          <h2 class="brand-tagline">{{ tagline }}</h2>
+
+            <nav class="nav">
+              {% block navbar %}
+              <ul class="nav-list">
+                <li class="nav-item"><a class="pure-button" href="/all-posts">all posts</a></li>
+                <br>
+                <li class="nav-item"><a class="pure-button" href="/about-me">about me</a></li>
+                <br>
+                <li class="nav-item"><a class="pure-button" href="/contact">contact</a></li>
+              </ul>
+              {% endblock %}
+            </nav>
+        </div>
+    </div>
+    <div class="content pure-u-1 pure-u-md-3-4">
+      {% block body %}
+      {% endblock %}
+    </div>
+</div>
+</body>
+</html>

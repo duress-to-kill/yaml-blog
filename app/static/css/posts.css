@@ -1,0 +1,33 @@
+div.content img {
+  width : 60%;
+}
+
+div.content img.post-image-wrap {
+  float : left;
+  margin : 10px 15px 10px 0px;
+}
+
+div.content img.post-image-center {
+  display : block;
+  margin-left : auto;
+  margin-right : auto;
+  margin-top : 10px;
+  margin-bottom : 15px;
+}
+
+.post-title>a {
+  color : #222;
+}
+
+.post-description a {
+  font-size : 10px;
+  line-height : 0em;
+}
+
+.brand-title a {
+  color : #fff;
+}
+
+.brand-title a:hover {
+  text-decoration : none;
+}
