@@ -8,3 +8,13 @@
 *.swo
 *.swp
 *.swn
+
+# Posts should be managed in a different repository. They're content, not code.
+posts/
+app/static/images/
+
+# This is reference content, it's not actually used by anything
+app/templates/pure-layout-blog/
+
+# Don't commit the virtual environment. It's not stable yet.
+flask/
