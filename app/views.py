@@ -3,59 +3,81 @@ from flask import render_template
 from random import choice
 
 from app import app, exceptions
-from app.post import Post
+from app.post import posts
+from app.page import pages
 
 @app.route('/')
 @app.route('/index')
 def index(autorefresh = False):
     autorefresh = True
     if autorefresh:
-        global posts
-        posts = read_posts()
-    return render_template('index.html',
+        posts.load_posts()
+    return render_template('post_list.html',
+            page_title = 'Recent posts',
             tagline = choice(taglines),
-            posts = posts[0:10])
+            categories = posts.categories,
+            posts = posts.by_date(count=10))
 
 @app.route('/all-posts')
 def all_posts():
-    return render_template('index.html',
+    return render_template('post_list.html',
+            page_title = 'All posts',
             tagline = choice(taglines),
-            posts = posts)
+            categories = posts.categories,
+            posts = posts.by_date())
 
-@app.route('/about-me')
-def about_me():
-    return render_template('aboutme.html',
-            tagline = choice(taglines))
+@app.route('/tag/<string:tag>')
+def posts_by_tag(tag):
+    try:
+        return render_template('post_list.html',
+                page_title = 'Tag: ' + tag,
+                tagline = choice(taglines),
+                categories = posts.categories,
+                posts = posts.by_tag(tag))
+    except KeyError:
+        return render_template('error_404.html',
+                tagline = choice(taglines),
+                categories = posts.categories,
+                path = '/tag/' + tag)
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html',
-            tagline = choice(taglines))
+@app.route('/category/<string:category>')
+def posts_by_category(category):
+    try:
+        return render_template('post_list.html',
+                page_title = 'Category: ' + category,
+                tagline = choice(taglines),
+                categories = posts.categories,
+                posts = posts.by_category(category))
+    except KeyError:
+        return render_template('error_404.html',
+                tagline = choice(taglines),
+                categories = posts.categories,
+                path = '/category/' + category)
+
+@app.route('/<string:name>')
+def page(name):
+    try:
+        return render_template('page.html',
+                tagline = choice(taglines),
+                categories = posts.categories,
+                page = pages[name])
+    except KeyError:
+        return render_template('error_404.html',
+                tagline = choice(taglines),
+                categories = posts.categories,
+                path = '/' + name)
 
 @app.route('/post/<string:name>')
 def post(name):
     try:
-        for post in posts:
-            if post.name == name:
-                return render_template('post.html',
-                        tagline = choice(taglines),
-                        post = post)
-    except AttributeError:
-        pass
-    return render_template('error_404.html',
-            path = 'posts/' + title)
-
-def read_posts():
-    import glob, os, yaml
-    post_paths = glob.glob(os.path.dirname(__file__) + '/../posts/*')
-    post_objs = []
-    for post in post_paths:
-        try:
-            post_objs.append(Post(post))
-        except exceptions.CorruptFileException as e:
-            print('Encountered a YAML syntax error while trying to load a post: ' + e.message)
-    post_objs.sort(key=lambda x: x.date, reverse=True)
-    return post_objs
+        return render_template('post.html',
+                tagline = choice(taglines),
+                categories = posts.categories,
+                post = posts[name])
+    except KeyError:
+        return render_template('error_404.html',
+                tagline = choice(taglines),
+                categories = posts.categories,
+                path = '/post/' + name)
 
 taglines = yaml.load(open('taglines.yaml'))
-posts = read_posts()
