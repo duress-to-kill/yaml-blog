@@ -1,7 +1,7 @@
 # YAML-Blog 
 This minimal Python blog is designed to be portable, self-contained, easy to self-host, and to allow you to publish without ever touching a browser.
 
-Posts are written as very simple YAML documents in the root of the blog's source tree. Indexes and pages are generated automatically based on the available YAML documents. The blog has zero backend dependencies, being entirely stateless. It also has minimal browser dependencies, being entirely javascript-less.
+Posts are written as very simple YAML documents in the blog's source tree. Indexes and pages are generated automatically based on the available YAML documents. The blog has zero backend dependencies, being entirely stateless. It also has minimal browser dependencies, being entirely javascript-less.
 
 This is basically a pet project, but it may appeal to people who want the most basic of soapboxes that operate with a minimum of fuss, or to those who, like me, dislike how web development tends to mean wrestling with a half dozen frameworks, guarding a very wide security attack surface, or just dealing with integrations for third-party services and other humans. Other sysadmins may find this model to their liking.
 
@@ -10,7 +10,7 @@ You can download this project, create a virtualenv, write a post, and be hosting
 ## Features
 
 - Publishing posts
-- Hosting images
+- Easy image embedding
 - Indexing by category and tag
 - Being pretty damn simple
 
@@ -41,7 +41,7 @@ The post's display title, tags, categories, and body text are all defined within
 
 Once you've go the server going, you may also want to edit the `about` and `contact` YAML documents in `pages/`. You can add additional documents to this directory if you want, which will become available at `your.server.com/docname`, bit will not be automatically indexed anywhere. You'll need to modify the HTML templates if you want these to show up.
 
-To embed images in your pages and posts, drop the images in `images/`, and then tag them inline like this: `img:cats_with_bananas.jpg:align` (where `align` is one of: `left`, `center`, `right`). Or just plug in an HTML tag to format it as you choose.
+To embed images in your pages and posts, drop the images in `images/`, and then tag them inline like this: `img:cats_with_bananas.jpg:align` (where `align` is either: `wrap` or `center`). Or just plug in an HTML tag to format it as you choose.
 
 For further details, see the example post document `/example-post`.
 
